@@ -135,7 +135,7 @@ def add_csv():
 
 
 def app():
-    app_running = True;
+    app_running = True
     while app_running:
         choice = menu()
         if choice == '1':
