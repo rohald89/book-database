@@ -200,7 +200,17 @@ def app():
                 time.sleep(1.5)
         elif choice == '4':
             # Analysis 
-            pass
+            oldest_book = session.query(Book).order_by(Book.date_published).first()
+            newest_book = session.query(Book).order_by(Book.date_published.desc()).first()
+            total_books = session.query(Book).count()
+            python_books = session.query(Book).filter(Book.title.like("%Python%")).count()
+            print(f'''
+            \n***** BOOK ANALYSIS *****
+            \rOldest Book: {oldest_book.title}
+            \rNewest Book: {newest_book.title}
+            \rTotal Books: {total_books}
+            \rNumber of Python Books: {python_books}''')
+            input('\nPress enter to return to the main menu.')
         else:
             # Exit
             print("Goodbye")
@@ -211,17 +221,4 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
     app()
     add_csv()
-
-    for book in session.query(Book):
-        print(book)
-
-
-
-# main menu - add, search, analysis, exit, View
-# add books to the database
-# edit books
-# delete books
-# search books
-# data cleaning
-# loop runs program
 
